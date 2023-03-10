@@ -18,7 +18,7 @@ def prune_gmt(file_name, out_file_name, expr_matrix_file, min_gene_num, max_gene
         else:
             out_file.write(pathway+'\tna\t'+'\t'.join(list(genes_shared))+'\n')
             pruned_pathway_dict[pathway] = list(genes_shared)
-    # return pruned_pathway_dict
+    return pruned_pathway_dict, gene_universe
 
 
 def read_gmt(file_name):
@@ -87,6 +87,14 @@ def generate_rank_file(deseq_result_file, out_file, direction=1):
     rank_file.close()
 
     file.close()
+
+
+def extract_top_gene(rank_file, num_gene, direction=1):
+    rank_file = np.loadtxt(rank_file, delimiter='\t', dtype=str)
+    if direction == 1:
+        return rank_file[:num_gene, 0]
+    elif direction == -1:
+        return rank_file[-num_gene:, 0]
 
 
 def create_dir(dir):
