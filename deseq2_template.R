@@ -1,4 +1,4 @@
-suppressPackageStartupMessages({library(DESeq2)})
+suppressWarnings({library(DESeq2)})
 countdata <- read.table("data_matrix_file_name", header=TRUE, row.names = 1)
 
 countdata <- countdata[ ,1:Sample_num]
