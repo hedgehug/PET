@@ -41,16 +41,25 @@ def run_enrichr(pathway_dict, gene_set, gene_universe, out_file_name, permutatio
 
     # compute z-score
     combined_score_dict = dict()
+    combined_score_list = []
     for pathway in pathway_names:
         z_score = (rank_dict[pathway] - pathway_mean_rank_dict[pathway]) / pathway_std_rank_dict[pathway]
         combined_score_dict[pathway] = abs(z_score * np.log10(pval_dict[pathway]))
+        combined_score_list.append(combined_score_dict[pathway])
+
+    # sort combined score, descending
+    combined_score_list, pathway_names = (list(t) for t in zip(*sorted(
+        zip(combined_score_list, pathway_names), reverse=True)))
 
     # fdr_list = multitest.fdrcorrection(pval_list, is_sorted=False)[-1]
 
     out_file = open(out_file_name, 'w')
-    out_file.write('Pathway\tp-value\tCombined score\n')
-    for pathway in pathway_names:
-        out_file.write('\t'.join([pathway, str(pval_dict[pathway]), str(combined_score_dict[pathway])]) + '\n')
+    out_file.write('Pathway\tp-value\tCombined score\tRank\n')
+    rank = 1
+    for idx in range(len(pathway_names)):
+        out_file.write('\t'.join([pathway_names[idx], str(pval_dict[pathway_names[idx]]),
+                                  str(combined_score_list[idx]), str(rank)]) + '\n')
+        rank +=1
     out_file.close()
     print('Results written to ', out_file_name)
     print('*' * 20)
