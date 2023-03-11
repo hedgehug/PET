@@ -1,14 +1,14 @@
 suppressWarnings({library(DESeq2)})
 countdata <- read.table("example/example_data.txt", header=TRUE, row.names = 1)
 
-countdata <- countdata[ ,1:62]
+countdata <- countdata[ ,1:10]
 
 # Convert to matrix
 countdata <- as.matrix(countdata)
 head(countdata)
 
 # Assign condition (first four are controls, second four contain the expansion)
-(condition <- factor(c(rep("poor_survival", 33), rep("better_survival", 29))))
+(condition <- factor(c(rep("poor_survival", 5), rep("better_survival", 5))))
 
 # Analysis with DESeq2 ----------------------------------------------------
 
