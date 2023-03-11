@@ -8,6 +8,7 @@
 * GSEA [Download](http://www.gsea-msigdb.org/gsea/downloads.jsp)
 * DESeq2 [install](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
 * statsmodels [install](https://www.statsmodels.org/stable/install.html)
+* seaborn, optional, for plotting new method evaluation result only [install](https://seaborn.pydata.org/installing.html)
 ## File format
 * Pathway file format, please refer to: [GSEA gene set format](https://software.broadinstitute.org/cancer/software/gsea/wiki/index.php/Data_formats#Gene_Set_Database_Formats). Now supporting .gmt format. 
 * Expression matrix file: tab-delimited text file. **Raw read count** is strongly recommended. First column is gene name, rest columns are sample expression. See exmaple in [example_data.txt](https://github.com/hedgehug/PET/tree/main/example) folder. 
@@ -32,18 +33,8 @@ To evaluate new methods, please run the pathway analysis methods with expression
 
 | Assay     | Source                                     | Number of targets |
 |-----------|--------------------------------------------|-------------------|
-| RNA-seq   | HepG2, K562                                |197|
+| shRNA knockdown followed by RNA-seq| HepG2, K562                                |197|
 | eCLIP-seq | HepG2, K562                                |73|
 | ChIP-seq  | HepG2, K562, CH12.LX, MEL, GM12878, A549, HEK293 |374|
 
-### Pathway p-value/FDR look-up
-
-During the study, we noticed certain pathways are more oftenly assigned a higher significance, for example, a lower p-value or false positive rate, in pathway analysis methods. Here, we provided a quick look-up script for pathways in different tissues and cancer typpes.
-
-To look up pathway significance:
-```
-python pathway_significane_look_up.py -p pathway_name -c BLCA -o output_file.txt
-```
-
-
-
+We provided a tutorial for how to evaluate a new pathway based on our benchmark here [evaluating new method tutorial]()
