@@ -37,4 +37,4 @@ To evaluate new methods, please run the pathway analysis methods with expression
 | eCLIP-seq | HepG2, K562                                |73|
 | ChIP-seq  | HepG2, K562, CH12.LX, MEL, GM12878, A549, HEK293 |374|
 
-We provided a tutorial for how to evaluate a new pathway based on our benchmark here [evaluating new method tutorial]()
+We provided a tutorial for how to evaluate a new pathway based on our benchmark here [evaluating new method tutorial](https://github.com/hedgehug/PET/blob/main/evaluate_new_method.ipynb)
