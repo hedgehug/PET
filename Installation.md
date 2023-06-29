@@ -2,7 +2,7 @@
 
 We strongly recommend Conda to install all packages required for running PET. 
 
-* Install [Miniconda](https://docs.conda.io/en/latest/miniconda.html), with Python version >=3.7.
+* Install [Miniconda](https://docs.conda.io/en/latest/miniconda.html), with Python version >=3.6.
 
 * Download PET repository.
 ```
