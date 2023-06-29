@@ -12,6 +12,10 @@ git clone https://github.com/hedgehug/PET.git
 ```
 conda env create -f environment.yml
 ```
+* Activate the enviroment
+```
+conda activate pet
+```
 * Install jupyter notebook and add environment to jupyter notebook :
 ```
 conda install -c anaconda jupyter
