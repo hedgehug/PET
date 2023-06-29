@@ -9,15 +9,16 @@
 * DESeq2 [install](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
 * statsmodels [install](https://www.statsmodels.org/stable/install.html)
 * seaborn, optional, for plotting new method evaluation result only [install](https://seaborn.pydata.org/installing.html)
+
+## Installation
+If all dependencies already installed, please follow the [Tutorial](https://github.com/hedgehug/PET/blob/main/run_PET_tutorial.ipynb) to run PET.
+
+To install PET from scratch, please refer to [Installation](https://github.com/hedgehug/PET/blob/main/Installation.md).
+
 ## File format
 * Pathway file format, please refer to: [GSEA gene set format](https://software.broadinstitute.org/cancer/software/gsea/wiki/index.php/Data_formats#Gene_Set_Database_Formats). Now supporting .gmt format. 
 * Expression matrix file: tab-delimited text file. **Raw read count** is strongly recommended. First column is gene name, rest columns are sample expression. See exmaple in [example_data.txt](https://github.com/hedgehug/PET/tree/main/example) folder. 
 
-## Installation
-To install PET, simply run
-```
-git clone https://github.com/hedgehug/PET.git
-```
 
 ## Functions
 
