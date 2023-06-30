@@ -121,7 +121,7 @@ def read_permutation_file(permutation_file):
     pathway_std_rank_dict = dict()
     for line in file_info:
         line = line.strip().split('\t')
-        pathway_mean_rank_dict[line[0]] = np.mean(np.array(line[1:]).astype(np.int))
-        pathway_std_rank_dict[line[0]] = np.std(np.array(line[1:]).astype(np.int))
+        pathway_mean_rank_dict[line[0]] = np.mean(np.array(line[1:]).astype(int))
+        pathway_std_rank_dict[line[0]] = np.std(np.array(line[1:]).astype(int))
     file.close()
     return pathway_mean_rank_dict, pathway_std_rank_dict
