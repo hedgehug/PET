@@ -16,11 +16,7 @@ conda env create -f environment.yml
 ```
 conda activate pet
 ```
-* Install jupyter notebook and add environment to jupyter notebook :
-```
-conda install -c anaconda jupyter
-python -m ipykernel install --user --name=pet
-```
+
 We will also need GSEA to run PET. Please download [GSEA for the
 command line (all platforms)](http://www.gsea-msigdb.org/gsea/downloads.jsp).
 
