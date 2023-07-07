@@ -1,0 +1,11 @@
+name: pt
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - r=4.2
+  - python=3.10
+  - jupyter
+  - bioconductor-deseq2
+  - seaborn
