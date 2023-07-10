@@ -37,8 +37,12 @@ The data for constructing the benchmark is in [data](https://github.com/hedgehug
 | eCLIP-seq | HepG2, K562                                |73| [HepG2_pvalue](https://github.com/hedgehug/PET/blob/main/data/ENCODE_HepG2_eCLIP_pval.gmt), [HepG2_sigval](https://github.com/hedgehug/PET/blob/main/data/ENCODE_HepG2_eCLIP_signal_value.gmt), [K562_pvalue](https://github.com/hedgehug/PET/blob/main/data/ENCODE_K562_eCLIP_pval.gmt), [K562_sigval](https://github.com/hedgehug/PET/blob/main/data/ENCODE_K562_eCLIP_signal_value.gmt) |                                                                                                                                                   |
 | ChIP-seq  | HepG2, K562, CH12.LX, MEL, GM12878, A549, HEK293 |374| [ChIP_qvalue](https://github.com/hedgehug/PET/blob/main/data/ENCODE_ChIP_seq_qvalue.gmt), [ChIP_score](https://github.com/hedgehug/PET/blob/main/data/ENCODE_ChIP_seq_peak_score.gmt)                                                                                                                                                                                                                                                                                   |
 
+Notes: 
+* For RNA-seq, the pathway files contain top 200 up/down-regulated differentially expressed genes after shRNA knockdown with specific target.
+* For eCLIP-seq and ChIP-seq, the pathway files contain annotated genes near the top peaks, sorted based on peak signal value/p-value/q-value.
+
 #### Run methods evaluated by Benchmark
-We provided template scripts for running other methods
+We provided template scripts for running other methods in [template scripts](https://github.com/hedgehug/PET/tree/main/template_script).
 
 #### Evaluate new method using Benchmark
 
