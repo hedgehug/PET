@@ -50,3 +50,20 @@ To evaluate new methods, please run the pathway analysis methods with expression
 
 We provided a tutorial for how to evaluate a new pathway based on our benchmark here [evaluating new method tutorial](https://github.com/hedgehug/PET/blob/main/evaluate_new_method.ipynb)
 
+## Copyright
+Copyright (c) 2023 Purdue University All rights reserved.
+Developed by:  Kazemian lab (Luopin Wang), College of Science, Purdue University, https://kazemianlab.com/
+Permission to use, copy, modify, and distribute this software and associated documentation (the “Software”) for educational, research and non-profit purposes, in each case by a government agency, educational institution, or other non-profit organization, without fee, and without a written agreement is hereby granted, provided that the above copyright notice, this paragraph and the following three paragraphs appear in all copies.
+ 
+Permission to make commercial use of this Software or permission for any use by a for-profit entity may be requested by contacting:
+Purdue Research Foundation
+Office of Technology Commercialization
+The Convergence Center
+101 Foundry Dr., Suite 2500
+West Lafayette, IN 47906
+ATTN: Business Development Manager
+otcip@prf.org
+ 
+DISCLAIMER. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE CONTRIBUTORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS WITH THE SOFTWARE.
+ 
+LIMITATION OF LIABILITY. TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT WILL PURDUE OR PURDUE RESEARCH FOUNDATION BE LIABLE TO ANY USER OF THIS CODE FOR ANY INCIDENTAL, CONSEQUENTIAL, EXEMPLARY OR PUNITIVE DAMAGES OF ANY KIND, LOST GOODWILL, LOST PROFITS, LOST BUSINESS AND/OR ANY INDIRECT ECONOMIC DAMAGES WHATSOEVER, REGARDLESS OF WHETHER SUCH DAMAGES ARISE FROM CLAIMS BASED UPON CONTRACT, NEGLIGENCE, TORT (INCLUDING STRICT LIABILITY OR OTHER LEGAL THEORY), A BREACH OF ANY WARRANTY OR TERM OF THIS AGREEMENT, AND REGARDLESS OF WHETHER PURDUE OR PURDUE RESEARCH FOUNDATION WAS ADVISED OR HAD REASON TO KNOW OF THE POSSIBILITY OF INCURRING SUCH DAMAGES IN ADVANCE.
