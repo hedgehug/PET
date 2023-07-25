@@ -52,7 +52,9 @@ We provided a tutorial for how to evaluate a new pathway based on our benchmark 
 
 ## Copyright
 Copyright (c) 2023 Purdue University All rights reserved.
+
 Developed by:  Kazemian lab (Luopin Wang), College of Science, Purdue University, https://kazemianlab.com/
+
 Permission to use, copy, modify, and distribute this software and associated documentation (the “Software”) for educational, research and non-profit purposes, in each case by a government agency, educational institution, or other non-profit organization, without fee, and without a written agreement is hereby granted, provided that the above copyright notice, this paragraph and the following three paragraphs appear in all copies.
  
 Permission to make commercial use of this Software or permission for any use by a for-profit entity may be requested by contacting:
