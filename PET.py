@@ -64,6 +64,10 @@ def process_gsea_report(report_file_name, reverse, start_rank, pathway_pval_dict
             pval = float(line[6])
         except:
             pval = 1.0
+        if reverse:
+            pathway_pval_dict[line[0]] = 1.0
+        else:
+            pathway_pval_dict[line[0]] = pval
         pathway_pval_dict[line[0]] = pval
         pathway_rank_dict[line[0]] = start_rank
         start_rank += 1

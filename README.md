@@ -5,10 +5,14 @@
 * Python >= 3.6
 * Numpy
 * Scipy
-* GSEA [Download](http://www.gsea-msigdb.org/gsea/downloads.jsp)
-* DESeq2 [install](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
+* Gseapy
+* PyDESeq2
 * statsmodels [install](https://www.statsmodels.org/stable/install.html)
-* seaborn, optional, for plotting new method evaluation result only [install](https://seaborn.pydata.org/installing.html)
+
+### Optional installation
+* If user already has GSEA installed or preferred other version of GSEA [Download](http://www.gsea-msigdb.org/gsea/downloads.jsp), please specify the path to GSEA_cmd/gsea-cli.sh while running.
+* DESeq2 in R, [install](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
+* seaborn, optional, for plotting new method evaluation result only, [install](https://seaborn.pydata.org/installing.html)
 
 ## Installation
 If all dependencies already installed, please follow the [Tutorial](https://github.com/hedgehug/PET/blob/main/run_PET_tutorial.ipynb) to run PET.
