@@ -219,12 +219,35 @@ def generate_rank_file(deseq_result_file, out_file, direction=1):
     file.close()
 
 
-def extract_top_gene(rank_file, num_gene, direction=1):
-    rank_file = np.loadtxt(rank_file, delimiter='\t', dtype=str)
+def extract_top_gene(deseq_result_file, num_gene=200, pval_threshold=0.05, padj_threshold=0.05,
+                     fc_threshold=0, basemean_threshold=2, direction=1):
+    df = pd.read_csv(deseq_result_file)
+    # sort by adjusted p-value
+    df = df.sort_values(by='padj')
+    df['fc'] = 2**df['log2FoldChange']
+    deg_dict = dict()
+    selected_df = df[
+        (df['baseMean'] >= basemean_threshold) & (df['padj'] <= padj_threshold) & (df['pvalue'] <= pval_threshold)
+        & ((df['fc'] >= fc_threshold) | (df['fc'] <= 1/fc_threshold))]
     if direction == 1:
-        return rank_file[:num_gene, 0]
+        deg_dict['up'] = selected_df.loc[(df['log2FoldChange'] > 0)].index.tolist()[:min(selected_df.loc[(df['log2FoldChange'] > 0)].shape[0], num_gene)]
+        deg_dict['down'] = selected_df.loc[(df['log2FoldChange'] < 0)].index.tolist()[:min(selected_df.loc[(df['log2FoldChange'] > 0)].shape[0], num_gene)]
     elif direction == -1:
-        return rank_file[-num_gene:, 0]
+        deg_dict['down'] = selected_df.loc[(df['log2FoldChange'] > 0)].index.tolist()[:min(selected_df.loc[(df['log2FoldChange'] > 0)].shape[0], num_gene)]
+        deg_dict['up'] = selected_df.loc[(df['log2FoldChange'] < 0)].index.tolist()[:min(selected_df.loc[(df['log2FoldChange'] > 0)].shape[0], num_gene)]
+    else:
+        raise Exception(
+            'Please specify direction as 1 or -1. 1 means log2FC > 0 indicates up-regulation, '
+            '-1 means log2FC < 0 indicates up-regulation')
+    print('Based on:')
+    print('p-value <= ', pval_threshold)
+    print('adjusted p-value <= ', padj_threshold)
+    print('fold change threshold >= ', fc_threshold)
+    print('base Mean >= ', basemean_threshold)
+    print('top N = ', num_gene)
+    print(len(deg_dict['up']), 'up-regulated DEGs')
+    print(len(deg_dict['down']), 'down-regulated DEGs')
+    return deg_dict
 
 
 def create_dir(dir):
