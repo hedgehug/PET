@@ -7,6 +7,7 @@ from pydeseq2.dds import DeseqDataSet
 from pydeseq2.default_inference import DefaultInference
 from pydeseq2.ds import DeseqStats
 from pydeseq2.utils import load_example_data
+import gseapy as gp
 
 
 def run_DEseq2(expr_file, contrast_matrix_file, script_file_name, result_file_path=None, result_dir_path=None, groups=None, method='R'):
@@ -105,7 +106,7 @@ def run_deseq2_r(read_count_file_path, contrast_file_path, script_name, result_f
     out_script.write(tmp_info)
     out_script.close()
     print('DESeq2 script written to '+script_name)
-    print('Start running R script')
+    print('Start running R script '+script_name)
     os.system('Rscript '+script_name)
     print('Analysis Done!')
 
@@ -113,6 +114,71 @@ def run_deseq2_r(read_count_file_path, contrast_file_path, script_name, result_f
 def run_deseq2_python(read_count_file_path, contrast_file_path, result_file_path):
     return
 
+
+def run_GSEA(prerank_file_path, pathway_file, out_dir, gsea_cli_path=None, method='Python',
+             thread_num=5, min_size=15, max_size=500, permutation_num=1000, seed=42,
+             plot=False, gsea_out_label='GSEA_result'):
+    if method == 'Python':
+        run_GSEA_python(prerank_file_path = prerank_file_path,
+                        pathway_file = pathway_file, out_dir=out_dir,
+                        plot= plot, min_size=min_size, max_size=max_size,
+                        thread_num = thread_num, permutation_num=permutation_num,
+                        seed=seed)
+    elif method == 'cli':
+
+        if gsea_cli_path == None:
+            raise Exception('Please specify file path of GSEA gsea-cli.sh. Otherwise, please keep method=\'Python\'.')
+        if not os.path.exists(gsea_cli_path):
+            raise Exception(gsea_cli_path+' file does not exist!')
+
+        # call GSEA cmd script
+        run_GSEA_cmd(cli_file_path=gsea_cli_path, prerank_file_path = prerank_file_path,
+                     pathway_file = pathway_file, out_dir=out_dir,
+                     plot= plot, min_size=min_size, max_size=max_size,
+                     permutation_num=permutation_num, seed=seed, gsea_out_label=gsea_out_label)
+    return
+
+
+def run_GSEA_cmd(cli_file_path, prerank_file_path, pathway_file, out_dir, gsea_out_label,
+                 plot=False, min_size=15, max_size=500, permutation_num=1000, seed=42):
+    """
+    ~/GSEA_test/GSEA_cmd/gsea-cli.sh GSEAPreranked -gmx example_new/c2.cp.kegg.v2023.1.Hs.symbols.gmt
+    -collapse No_Collapse -mode Max_probe -norm meandiv -nperm 1000 -rnk example_new/cond1.vs.cond2.rnk
+    -scoring_scheme weighted -rpt_label example_test   -create_svgs false -include_only_symbols true
+     -make_sets true -plot_top_x 5 -rnd_seed timestamp -set_max 500 -set_min 15 -zip_report false
+     -out example_new/
+    :return:
+    """
+    print('Start running GSEA!')
+    print('Commandas to run GSEA: '+cli_file_path+' GSEAPreranked -gmx '+pathway_file+
+              ' -collapse No_Collapse -mode Max_probe -norm meandiv -nperm '+str(permutation_num)
+              +' -rnk '+prerank_file_path+' -scoring_scheme weighted -rpt_label '+gsea_out_label
+              +' -create_svgs false -include_only_symbols true -make_sets true -plot_top_x 5 -rnd_seed '+str(seed)+
+              ' -set_max '+str(max_size)+' -set_min '+str(min_size)+' -zip_report false -out '+out_dir)
+    os.system(cli_file_path+' GSEAPreranked -gmx '+pathway_file+
+              ' -collapse No_Collapse -mode Max_probe -norm meandiv -nperm '+str(permutation_num)
+              +' -rnk '+prerank_file_path+' -scoring_scheme weighted -rpt_label '+gsea_out_label
+              +' -create_svgs false -include_only_symbols true -make_sets true -plot_top_x 5 -rnd_seed '+str(seed)+
+              ' -set_max '+str(max_size)+' -set_min '+str(min_size)+' -zip_report false -out '+out_dir)
+
+
+def run_GSEA_python(prerank_file_path, pathway_file, out_dir, plot=False, thread_num=5, min_size=15,
+                    max_size=500, permutation_num=1000, seed=42):
+    # read rank file
+    rnk = pd.read_csv(prerank_file_path, header=None, index_col=0, sep="\t")
+    # # run prerank
+    # # enrichr libraries are supported by prerank module. Just provide the name
+    # # use 4 process to acceralate the permutation speed
+    pre_res = gp.prerank(rnk=rnk,  # or rnk = rnk,
+                         gene_sets=pathway_file,
+                         threads=thread_num,
+                         min_size=min_size,
+                         max_size=max_size,
+                         permutation_num=permutation_num,  # reduce number to speed up testing
+                         outdir=out_dir,  # don't write to disk
+                         seed=seed,
+                         plot = plot,
+                         verbose=True)
 
 # generate .rnk file for GSEA prerank from DEseq2 result
 def generate_rank_file(deseq_result_file, out_file, direction=1):
@@ -149,7 +215,7 @@ def generate_rank_file(deseq_result_file, out_file, direction=1):
     for item in final_list:
         rank_file.write(item[1] + '\t' + str(item[0]) + '\n')
     rank_file.close()
-
+    print('Rank file written to ', out_file)
     file.close()
 
 

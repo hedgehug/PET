@@ -30,7 +30,7 @@ if (SAVE_ALL){
       res <- res[order(res$padj), ]
       resdata <- merge(as.data.frame(res), as.data.frame(counts(dds, normalized=TRUE)), by="row.names", sort=FALSE)
       names(resdata)[1] <- "Gene"
-      write.csv(res, file=paste("example_new//", levels(dds$condition)[idx_1], 'vs.', levels(dds$condition)[idx_2],'.csv', sep =''))
+      write.csv(res, file=paste("example_new//", levels(dds$condition)[idx_1], '.vs.', levels(dds$condition)[idx_2],'.csv', sep =''))
       print(paste('Result saved to ', paste("example_new//", levels(dds$condition)[idx_1], '.vs.', levels(dds$condition)[idx_2],'.csv', sep ='')))
   }
   }
