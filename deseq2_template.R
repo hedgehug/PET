@@ -5,14 +5,11 @@ countdata <- countdata[ ,1:Sample_num]
 
 # Convert to matrix
 countdata <- as.matrix(countdata)
-head(countdata)
 
-# Assign condition (first four are controls, second four contain the expansion)
-(condition <- factor(c(rep("group1_id", group1_num), rep("group2_id", group2_num))))
+# Assign condition
+condition <- factor(c(COND_REP))
 
 # Analysis with DESeq2 ----------------------------------------------------
-
-library(DESeq2)
 
 # Create a coldata frame and instantiate the DESeqDataSet. See ?DESeqDataSetFromMatrix
 coldata <- data.frame(row.names=colnames(countdata), condition)
@@ -21,12 +18,32 @@ dds
 
 # Run the DESeq pipeline
 dds <- DESeq(dds)
-
-# Get differential expression results
-res <- results(dds)
-# table(res$padj<0.05)
-## Order by adjusted p-value
-res <- res[order(res$padj), ]
-resdata <- merge(as.data.frame(res), as.data.frame(counts(dds, normalized=TRUE)), by="row.names", sort=FALSE)
-names(resdata)[1] <- "Gene"
-write.csv(res, file="OUTPUT.csv")
+SAVE_ALL <- TRUE
+if (SAVE_ALL){
+  # save results of all comparisons
+  for (idx_1 in 1:(nlevels(dds$condition)-1)) {
+    for (idx_2 in (idx_1+1):nlevels(dds$condition)){
+      print(paste('Comparing', levels(dds$condition)[idx_1], 'vs.', levels(dds$condition)[idx_2]))
+      res <- results(dds, contrast=c("condition", levels(dds$condition)[idx_1], levels(dds$condition)[idx_2]))
+      # table(res$padj<0.05)
+      # Order by adjusted p-value
+      res <- res[order(res$padj), ]
+      resdata <- merge(as.data.frame(res), as.data.frame(counts(dds, normalized=TRUE)), by="row.names", sort=FALSE)
+      names(resdata)[1] <- "Gene"
+      write.csv(res, file=paste("OUT_DIR/", levels(dds$condition)[idx_1], 'vs.', levels(dds$condition)[idx_2],'.csv', sep =''))
+      print(paste('Result saved to ', paste("OUT_DIR/", levels(dds$condition)[idx_1], '.vs.', levels(dds$condition)[idx_2],'.csv', sep ='')))
+  }
+  }
+}else{
+  # save results for one comparison
+  # Get differential expression results
+  print(paste('Comparing', "COND1_name", 'vs.', "COND2_name"))
+  res <- results(dds, contrast=c("condition", "COND1_name", "COND2_name"))
+  # table(res$padj<0.05)
+  ## Order by adjusted p-value
+  res <- res[order(res$padj), ]
+  resdata <- merge(as.data.frame(res), as.data.frame(counts(dds, normalized=TRUE)), by="row.names", sort=FALSE)
+  names(resdata)[1] <- "Gene"
+  write.csv(res, file="OUTPUT.csv")
+  print(paste('Result saved to ', "OUTPUT.csv"))
+}

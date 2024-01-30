@@ -4,6 +4,7 @@ import scipy.stats as stat
 import statsmodels.stats.multitest as multitest
 from helper import prune_gmt
 
+
 def extract_fisher_rank(fisher_result_file):
     print('Calculating fisher rank...')
     file = open(fisher_result_file, 'r')

@@ -14,7 +14,8 @@ def run_fisher_test(pathway_dict, gene_set, gene_universe_num, out_file_name):
         pval_list.append(pval)
         intersection_list.append(intersection_num)
     fdr_list = multitest.fdrcorrection(pval_list, is_sorted=False)[-1]
-    fdr_list, pathway_list, pval_list, intersection_list = (list(t) for t in zip(*sorted(zip(fdr_list, pathway_list, pval_list, intersection_list))))
+    # sort by p-value
+    pval_list, fdr_list, pathway_list, intersection_list = (list(t) for t in zip(*sorted(zip(pval_list, fdr_list, pathway_list, intersection_list))))
     out_file = open(out_file_name, 'w')
     out_file.write('Pathway\t#Overlap Gene\tp-value\tFDR\tRank\n')
     rank = 1

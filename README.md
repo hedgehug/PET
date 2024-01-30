@@ -7,22 +7,21 @@
 * Scipy
 * Gseapy
 * PyDESeq2
-* statsmodels [install](https://www.statsmodels.org/stable/install.html)
+* statsmodels
+* DESeq2 (R version)
 
-### Optional installation
-* If user already has GSEA installed or preferred other version of GSEA [Download](http://www.gsea-msigdb.org/gsea/downloads.jsp), please specify the path to GSEA_cmd/gsea-cli.sh while running.
-* DESeq2 in R, [install](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
-* seaborn, optional, for plotting new method evaluation result only, [install](https://seaborn.pydata.org/installing.html)
+### Optional requirement
+* If user prefers another version of GSEA, please download **command line (all platforms)** version from [GSEA download](http://www.gsea-msigdb.org/gsea/downloads.jsp).
 
 ## Installation
+To install PET, please refer to [Installation](https://github.com/hedgehug/PET/blob/main/Installation.md).
+
 If all dependencies already installed, please follow the [Tutorial](https://github.com/hedgehug/PET/blob/main/run_PET_tutorial.ipynb) to run PET.
 
-To install PET from scratch, please refer to [Installation](https://github.com/hedgehug/PET/blob/main/Installation.md).
-
-## Required files
+## Required input files
 * Pathway file, please provide pathway file in .gmt format, refer to: [GSEA gene set format](https://software.broadinstitute.org/cancer/software/gsea/wiki/index.php/Data_formats#Gene_Set_Database_Formats). Please check [example pathway file](https://github.com/hedgehug/PET/blob/main/example/c2.cp.kegg.v2023.1.Hs.symbols.gmt). 
-* Expression matrix file: tab-delimited text file. **Raw read count** is strongly recommended. First column is gene name, rest columns are sample expression. See exmaple in [example_data.txt](https://github.com/hedgehug/PET/tree/main/example/example_data.txt) folder. 
-
+* Expression matrix file: tab-delimited text file. **Raw read count** is strongly recommended. First column is gene name, rest columns are sample expression ordered by conditions. See example in [example_data.txt](https://github.com/hedgehug/PET/tree/main/example/example_data.txt). 
+* Contrast file: tab-delimited text file, first column as condition name, second column as sample number for the condition. **Please keep condition order consistent as the gene expression matrix file header.** See example in [example_contrast.txt](https://github.com/hedgehug/PET/tree/main/example/example_data.txt). 
 
 ## Functions
 
@@ -53,6 +52,10 @@ We provided template scripts for running other methods in [template scripts](htt
 To evaluate new methods, please run the pathway analysis methods with expression profiles from one cell line, e.g. K562 RNA-seq, and the pathway file from another cell line, e.g. HepG2 RNA-seq. 
 
 We provided a tutorial for how to evaluate a new pathway based on our benchmark here [evaluating new method tutorial](https://github.com/hedgehug/PET/blob/main/evaluate_new_method.ipynb)
+
+## Update
+* PyDESeq2 and GSEAPY are now included.
+* Customized DEG selection provided.
 
 ## Copyright
 Copyright (c) 2023 Purdue University All rights reserved.
