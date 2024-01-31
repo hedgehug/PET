@@ -9,3 +9,5 @@ dependencies:
   - jupyter
   - bioconductor-deseq2
   - seaborn
+  - gseapy
+  - pydeseq2

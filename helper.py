@@ -10,7 +10,8 @@ from pydeseq2.utils import load_example_data
 import gseapy as gp
 
 
-def run_DEseq2(expr_file, contrast_matrix_file, script_file_name, result_file_path=None, result_dir_path=None, groups=None, method='R'):
+def run_DEseq2(expr_file, contrast_matrix_file, script_file_name=None, result_file_path=None,
+               result_dir_path=None, groups=None, method='R', cpu_num=5):
     if method == 'R':
         if script_file_name is None:
             print('Please provide a path for writing DESeq2 script.')
@@ -20,7 +21,8 @@ def run_DEseq2(expr_file, contrast_matrix_file, script_file_name, result_file_pa
                      script_name=script_file_name, groups=groups)
     elif method == 'Python':
         run_deseq2_python(read_count_file_path=expr_file, contrast_file_path=contrast_matrix_file,
-                          result_file_path = result_file_path)
+                          result_file_path=result_file_path, result_dir_path=result_dir_path,
+                          groups=groups, cpu_num=cpu_num)
     else:
         print('Please specify a valid method for running DESeq2. Options: R, Python.')
         return
@@ -111,8 +113,54 @@ def run_deseq2_r(read_count_file_path, contrast_file_path, script_name, result_f
     print('Analysis Done!')
 
 
-def run_deseq2_python(read_count_file_path, contrast_file_path, result_file_path):
-    return
+def run_deseq2_python(read_count_file_path, contrast_file_path,
+                      result_file_path, result_dir_path, groups=None, cpu_num=5):
+    counts_df = pd.read_csv(read_count_file_path, sep='\t', index_col=0, header=0)
+    counts_df = counts_df.dropna()
+    counts_df = counts_df.T
+    print(counts_df.shape[0], 'samples')
+    print(counts_df.shape[1], 'genes')
+    samples = counts_df.index
+    contrast_df = read_contrast_file(contrast_file_path)
+    meta_df = pd.DataFrame()
+    meta_df.index = samples
+    conds = []
+    for idx in contrast_df.index:
+        conds.extend([contrast_df.loc[idx]['condition']] * contrast_df.loc[idx]['sample_num'])
+    meta_df['condition'] = conds
+    print(len(set(meta_df['condition'])), 'conditions')
+    inference = DefaultInference(n_cpus=cpu_num)
+    dds = DeseqDataSet(
+        counts=counts_df,
+        metadata=meta_df,
+        design_factors="condition",
+        refit_cooks=True,
+        inference=inference,
+        # n_cpus=8, # n_cpus can be specified here or in the inference object
+    )
+    dds.deseq2()
+    all_conds = list(set(meta_df['condition']))
+    all_conds.sort()
+
+    if groups == None:
+        # compute comparison for all groups
+        for idx_1 in range(0, len(all_conds)-1):
+            for idx_2 in range(idx_1+1, len(all_conds)):
+                print('Comparing ', all_conds[idx_1], '.vs.', all_conds[idx_2])
+                stat_res = DeseqStats(dds, inference=inference,
+                                      contrast=["condition", all_conds[idx_1], all_conds[idx_2]])
+                stat_res.summary()
+                stat_res.results_df.to_csv(result_dir_path+'/'+all_conds[idx_1]+'.vs.'+
+                                           all_conds[idx_2]+'.PyDESeq2_result.csv')
+                print('Results written to ', result_dir_path+'/'+all_conds[idx_1]+'.vs.'+
+                                           all_conds[idx_2]+'.PyDESeq2_result.csv')
+    else:
+        print('Comparing ',  groups[0], '.vs.', groups[1])
+        stat_res = DeseqStats(dds, inference=inference, contrast=["condition", groups[0], groups[1]])
+        stat_res.summary()
+        stat_res.results_df.to_csv(result_file_path)
+        print('Results written to ', result_file_path)
+    print('Done!')
 
 
 def run_GSEA(prerank_file_path, pathway_file, out_dir, gsea_cli_path=None, method='Python',
