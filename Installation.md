@@ -16,17 +16,18 @@ conda env create -f environment_mac.yml
 # for Linux, tested in Ubuntu
 conda env create -f environment_linux.yml
 ```
-* Activate the newly created PET conda environment
+* Activate the newly created PET conda environment and add it to jupyter kernals:
 ```
 conda activate pet
+python -m ipykernel install --user --name=pet
 ```
 
-We will also need GSEA to run PET. Please download [GSEA for the
+If user prefers other version GSEA, other than GSEAPY (default option), please download [GSEA for the
 command line (all platforms)](http://www.gsea-msigdb.org/gsea/downloads.jsp). JDK 11 is required for running GSEA command line tool, [download here](https://www.oracle.com/java/technologies/downloads/).
 
 After installation, please follow [Tutorial](https://github.com/hedgehug/PET/blob/main/run_PET_tutorial.ipynb) to run PET. 
 
-To open jupyter notebook, run following command in PET/:
+To open jupyter notebook, run following command in terminal under PET/ directory and select PET as kernal to run the notebook:
 ```
 jupyter notebook
 ```
