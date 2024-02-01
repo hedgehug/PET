@@ -21,7 +21,7 @@ If all dependencies already installed, please follow the [Tutorial](https://gith
 ## Required input files
 * Pathway file, please provide pathway file in .gmt format, refer to: [GSEA gene set format](https://software.broadinstitute.org/cancer/software/gsea/wiki/index.php/Data_formats#Gene_Set_Database_Formats). Please check [example pathway file](https://github.com/hedgehug/PET/blob/main/example/c2.cp.kegg.v2023.1.Hs.symbols.gmt). 
 * Expression matrix file: tab-delimited text file. **Raw read count** is strongly recommended. First column is gene name, rest columns are sample expression ordered by conditions. See example in [example_data.txt](https://github.com/hedgehug/PET/tree/main/example/example_data.txt). 
-* Contrast file: tab-delimited text file, first column as condition name, second column as sample number for the condition. **Please keep condition order consistent as the gene expression matrix file header.** See example in [example_contrast.txt](https://github.com/hedgehug/PET/tree/main/example/example_data.txt). 
+* Contrast file: tab-delimited text file, first column as condition name, second column as sample number for the condition. **Please keep condition order consistent as the gene expression matrix file header.** See example in [example_contrast.txt](https://github.com/hedgehug/PET/tree/main/example/example_contrast.txt). 
 
 ## Functions
 
