@@ -7,7 +7,18 @@ import os
 random.seed(42)
 
 
-def run_enrichr(pathway_dict, gene_set, gene_universe, out_file_name, permutation_num, permutation_file_name):
+def run_enrichr(pathway_dict, deg_dict, gene_universe, permutation_num, permutation_file_name,
+                out_file_prefix, out_dir):
+    for item in deg_dict.keys():
+        print('Running Enrichr for genes in ', item)
+        run(pathway_dict=pathway_dict, gene_set=deg_dict[item],
+            gene_universe=gene_universe, permutation_num=permutation_num,
+            permutation_file_name=permutation_file_name,
+            out_file_prefix=out_file_prefix, out_dir=out_dir, key=item)
+
+
+def run(pathway_dict, gene_set, gene_universe, permutation_num,
+        permutation_file_name, out_file_prefix, out_dir, key):
     if not os.path.exists(permutation_file_name):
         print(permutation_file_name, 'does not exist, initializing permutation')
         generate_permutation(gene_universe, len(gene_set),
@@ -19,7 +30,6 @@ def run_enrichr(pathway_dict, gene_set, gene_universe, out_file_name, permutatio
         print(permutation_file_name, 'already exists, reading file now...')
         pathway_mean_rank_dict, pathway_std_rank_dict = read_permutation_file(permutation_file_name)
 
-    print('Performing fisher test now...')
     # run fisher exact test
     all_fisher_result = []
     pval_dict = dict()
@@ -53,7 +63,7 @@ def run_enrichr(pathway_dict, gene_set, gene_universe, out_file_name, permutatio
 
     # fdr_list = multitest.fdrcorrection(pval_list, is_sorted=False)[-1]
 
-    out_file = open(out_file_name, 'w')
+    out_file = open(out_dir+'/'+out_file_prefix+'.'+key+'.enrichr_result.txt', 'w')
     out_file.write('Pathway\tp-value\tCombined score\tRank\n')
     rank = 1
     for idx in range(len(pathway_names)):
@@ -61,9 +71,8 @@ def run_enrichr(pathway_dict, gene_set, gene_universe, out_file_name, permutatio
                                   str(combined_score_list[idx]), str(rank)]) + '\n')
         rank +=1
     out_file.close()
-    print('Results written to ', out_file_name)
+    print('Results written to ', out_dir+'/'+out_file_prefix+'.'+key+'.enrichr_result.txt')
     print('*' * 20)
-
 
 
 def generate_permutation(gene_universe, gene_num, permutation_num, pathway_dict, permutation_file_name):

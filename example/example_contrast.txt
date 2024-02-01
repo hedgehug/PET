@@ -1,0 +1,3 @@
+cond1	4
+cond2	3
+cond3	3
