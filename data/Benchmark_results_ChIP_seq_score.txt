@@ -1,4 +1,4 @@
-Fisher	Enrichr	GSEA	PET
+ORA	Enrichr	GSEA	PET
 4	6	2	3
 1	2	1	1
 1	2	1	1
