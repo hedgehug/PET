@@ -6,11 +6,13 @@ channels:
   - defaults
 dependencies:
   - _r-mutex=1.0.1=anacondar_1
+  - anndata=0.10.5.post1=pyhd8ed1ab_0
   - anyio=3.7.0=pyhd8ed1ab_1
   - appnope=0.1.3=pyhd8ed1ab_0
   - argcomplete=3.1.1=pyhd8ed1ab_0
   - argon2-cffi=21.3.0=pyhd3eb1b0_0
   - argon2-cffi-bindings=21.2.0=py310hca72f7f_0
+  - array-api-compat=1.4.1=pyhd8ed1ab_0
   - asttokens=2.2.1=pyhd8ed1ab_0
   - attrs=23.1.0=pyh71513ae_1
   - backcall=0.2.0=pyhd3eb1b0_0
@@ -45,10 +47,10 @@ dependencies:
   - bwidget=1.9.14=h694c41f_1
   - bzip2=1.0.8=h0d85af4_4
   - c-ares=1.19.1=h0dc2134_0
-  - ca-certificates=2023.05.30=hecd8cb5_0
+  - ca-certificates=2023.12.12=hecd8cb5_0
   - cairo=1.16.0=h09dd18c_1016
   - cctools_osx-64=973.0.1=h5676edf_13
-  - certifi=2023.5.7=pyhd8ed1ab_0
+  - certifi=2023.11.17=pyhd8ed1ab_0
   - cffi=1.15.1=py310ha78151a_3
   - charset-normalizer=3.1.0=pyhd8ed1ab_0
   - clang=16.0.6=hc177806_0
@@ -86,10 +88,13 @@ dependencies:
   - glib-tools=2.76.3=h7d26f99_0
   - gmp=6.2.1=h2e338ed_0
   - graphite2=1.3.14=he9d5cce_1
+  - gseapy=1.1.1=py310h88f0e6a_0
   - gsl=2.7.1=hdbe807d_1
   - gst-plugins-base=1.22.4=hb5d3a86_0
   - gstreamer=1.22.4=h840fbdc_0
+  - h5py=3.9.0=py310hf9d4033_0
   - harfbuzz=7.3.0=h413ba03_0
+  - hdf5=1.12.1=nompi_h0aa1fa2_104
   - icu=72.1=h7336db1_0
   - idna=3.4=pyhd8ed1ab_0
   - importlib-metadata=6.7.0=pyha770c72_0
@@ -102,6 +107,7 @@ dependencies:
   - isl=0.25=hb486fe8_0
   - jedi=0.18.2=pyhd8ed1ab_0
   - jinja2=3.1.2=pyhd8ed1ab_1
+  - joblib=1.3.2=pyhd8ed1ab_0
   - jq=1.6=hc929b4f_1000
   - jsonschema=4.17.3=pyhd8ed1ab_0
   - jupyter=1.0.0=py310hecd8cb5_7
@@ -170,6 +176,7 @@ dependencies:
   - munkres=1.1.4=pyh9f0ad1d_0
   - mysql-common=8.0.33=hc6116ba_0
   - mysql-libs=8.0.33=haa61052_0
+  - natsort=8.4.0=pyhd8ed1ab_0
   - nbclassic=1.0.0=pyhb4ecaf3_1
   - nbclient=0.8.0=pyhd8ed1ab_0
   - nbconvert=7.6.0=pyhd8ed1ab_0
@@ -185,7 +192,7 @@ dependencies:
   - numpy=1.25.0=py310h7451ae0_0
   - oniguruma=6.9.8=hac89ed1_0
   - openjpeg=2.5.0=h13ac156_2
-  - openssl=3.1.1=h8a1eda9_1
+  - openssl=3.2.0=hd75f5a5_1
   - overrides=7.3.1=pyhd8ed1ab_0
   - packaging=23.1=pyhd8ed1ab_0
   - pandas=2.0.3=py310h5e4fcda_0
@@ -212,6 +219,7 @@ dependencies:
   - ptyprocess=0.7.0=pyhd3eb1b0_2
   - pure_eval=0.2.2=pyhd3eb1b0_0
   - pycparser=2.21=pyhd3eb1b0_0
+  - pydeseq2=0.4.4=pyhdfd78af_0
   - pygments=2.15.1=pyhd8ed1ab_0
   - pyobjc-core=9.2=py310hef2d279_0
   - pyobjc-framework-cocoa=9.2=py310hef2d279_0
@@ -311,6 +319,7 @@ dependencies:
   - requests=2.31.0=pyhd8ed1ab_0
   - rfc3339-validator=0.1.4=pyhd8ed1ab_0
   - rfc3986-validator=0.1.1=pyh9f0ad1d_0
+  - scikit-learn=1.3.2=py310h04b1a37_1
   - scipy=1.11.1=py310h3900cf1_0
   - seaborn=0.12.2=hd8ed1ab_0
   - seaborn-base=0.12.2=pyhd8ed1ab_0
@@ -326,6 +335,7 @@ dependencies:
   - statsmodels=0.14.0=py310hc1335a1_1
   - tapi=1100.0.11=h9ce4665_0
   - terminado=0.17.1=pyhd1c38e8_0
+  - threadpoolctl=3.2.0=pyha21a80b_0
   - tinycss2=1.2.1=pyhd8ed1ab_0
   - tk=8.6.12=h5dbffcc_0
   - tktable=2.10=h49f0cf7_3
