@@ -11,10 +11,8 @@ git clone https://github.com/hedgehug/PET.git
 * Enter the downloaded folder, create a new conda environment for PET, this step will install all Python and R dependencies.
 ```
 cd PET/
-# for MacOS
-conda env create -f environment_mac.yml
-# for Linux, tested in Ubuntu
-conda env create -f environment_linux.yml
+# for MacOS (tested in Sonoma) or Linux (tested in Ubuntu)
+conda env create -f environment.yml
 ```
 * Activate the newly created PET conda environment and add it to jupyter kernals:
 ```
